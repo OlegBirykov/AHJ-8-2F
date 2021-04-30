@@ -1,4 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: black;
+  font: inherit;
+  background-color: transparent;  
+}
+
 body {
-  background: #eee;
+  background-color: white;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+}
+
+#container {
+  min-width: 500px;
+  max-width: 1000px;
+  margin: 100px auto 0 auto;
+}
+
+.registration-form {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.registration-form .form {
+  width: 400px;
+  min-width: 300px;
+  margin: 0 5%;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.registration-form .title {
+  margin-top: 0.5em;
+}
+
+.registration-form .name {
+  display: block;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 1.5em auto 0 auto;
+  padding: 0.6em 1em;
+  border: 1px solid black;
+}
+
+.registration-form .continue-button {
+  display: block;
+  box-sizing: border-box;
+  width: 60%;
+  margin: 1em auto;
+  padding: 0.8em 0;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
+.registration-form .error {
+  margin-bottom: 0.5em;
+  font-size: 0.8em;
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+/*
+.sports-report-widget .comments-wrap {
+  padding: 2em 0;
+  border: 1px solid #000000;
+  border-radius: 15px;
+}
+
+.sports-report-widget .comments {
+  padding-right: 0.5em;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.sports-report-widget .error {
+  margin: 1em 0 0 1em;
+  font-size: 0.8em;
+  color: red;
+}
+
+.sports-report-widget .comment {
+  display: flex;
+}
+
+.sports-report-widget .icon {
+  font-size: 1.5em;
+  flex: 0 0 2em;
+  padding-top: 0.7em;
   text-align: center;
 }
+
+.sports-report-widget .red {
+  padding-top: 0.8em;
+  color: red;
+}
+
+.sports-report-widget .text {
+  flex: 0 1 auto;
+  padding-bottom: 0.8em;  
+  line-height: 1.4;
+}
+
+.sports-report-widget time{
+  font-size: 0.6em;  
+}
+
+.sports-report-widget .hidden {
+  display: none;
+}
+*/
