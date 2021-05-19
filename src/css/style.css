@@ -13,9 +13,19 @@ body {
   font-size: 16px;
 }
 
+button {
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  transition: background-color 0.5s;
+  background-color: aqua;
+}
+
 #container {
-  min-width: 500px;
-  max-width: 1000px;
+  min-width: 600px;
+  max-width: 800px;
+  width: 80%;
   margin: 100px auto 0 auto;
 }
 
@@ -70,56 +80,46 @@ body {
   color: red;
 }
 
+.chat-widget {
+  display: flex;
+}
+
+.chat-widget .users {
+  width: 25%;
+  height: fit-content;
+  max-height: 760px;
+  margin-top: 20px;
+  padding-top: 1em;
+  border: 1px solid black;
+  border-right-style: none;
+  border-radius: 15px 0 0 15px;
+  overflow: auto;
+} 
+
+.chat-widget .user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.6em;
+}
+
+.chat-widget .user-avatar {
+  margin-left: 0.6em;
+}
+
+.chat-widget .user-name {
+  margin-left: 0.8em;
+}
+
+.chat-widget .messages {
+  width: 75%;
+  height: 800px;
+  border: 1px solid black;
+}
+
 .hidden {
   display: none;
 }
 
-/*
-.sports-report-widget .comments-wrap {
-  padding: 2em 0;
-  border: 1px solid #000000;
-  border-radius: 15px;
-}
-
-.sports-report-widget .comments {
-  padding-right: 0.5em;
-  max-height: 500px;
-  overflow: auto;
-}
-
-.sports-report-widget .error {
-  margin: 1em 0 0 1em;
-  font-size: 0.8em;
+.red {
   color: red;
 }
-
-.sports-report-widget .comment {
-  display: flex;
-}
-
-.sports-report-widget .icon {
-  font-size: 1.5em;
-  flex: 0 0 2em;
-  padding-top: 0.7em;
-  text-align: center;
-}
-
-.sports-report-widget .red {
-  padding-top: 0.8em;
-  color: red;
-}
-
-.sports-report-widget .text {
-  flex: 0 1 auto;
-  padding-bottom: 0.8em;  
-  line-height: 1.4;
-}
-
-.sports-report-widget time{
-  font-size: 0.6em;  
-}
-
-.sports-report-widget .hidden {
-  display: none;
-}
-*/

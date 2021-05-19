@@ -1,3 +1,5 @@
+import verifyName from '../utils/tools';
+
 export default class RegistrationForm {
   constructor(parentEl, ws, callback) {
     this.parentEl = parentEl;
@@ -24,7 +26,7 @@ export default class RegistrationForm {
           <p class="${this.classes.title}">
             Выберите псевдоним
           </p> 
-          <input class="${this.classes.name}" name="${this.classes.name}" required>
+          <input class="${this.classes.name}" name="${this.classes.name}">
           <button class="${this.classes.button}" type="submit">
             Продолжить
           </button>
@@ -52,11 +54,15 @@ export default class RegistrationForm {
   }
 
   registration(evt) {
+    evt.preventDefault();
     const name = this.input.value;
-    if (!name) {
+
+    const verify = verifyName(name);
+    if (!verify.status) {
+      this.showError(verify.error);
       return;
     }
-    evt.preventDefault();
+
     this.callback(name);
   }
 
@@ -67,5 +73,9 @@ export default class RegistrationForm {
 
   hideError() {
     this.error.classList.add('hidden');
+  }
+
+  hide() {
+    this.widget.classList.add('hidden');
   }
 }
