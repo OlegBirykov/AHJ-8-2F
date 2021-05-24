@@ -1,6 +1,6 @@
 import ChatWidget from './widgets/ChatWidget';
 
-const url = 'ws://localhost:7070/ws';
+const url = 'ws://ahj-8-2.herokuapp.com/ws';
 
 const chat = new ChatWidget(
   document.getElementById('container'),

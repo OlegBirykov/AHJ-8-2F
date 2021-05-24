@@ -1,4 +1,6 @@
-export default function verifyName(name) {
+import moment from 'moment';
+
+export function verifyName(name) {
   const result = { status: false };
 
   if (!name) {
@@ -18,4 +20,8 @@ export default function verifyName(name) {
 
   result.status = true;
   return result;
+}
+
+export function outputTime(datetime) {
+  return moment(datetime).format('HH:mm DD.MM.YYYY');
 }

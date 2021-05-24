@@ -1,4 +1,4 @@
-import verifyName from '../utils/tools';
+import { verifyName } from '../utils/tools';
 
 export default class RegistrationForm {
   constructor(parentEl, ws, callback) {
@@ -30,7 +30,9 @@ export default class RegistrationForm {
           <button class="${this.classes.button}" type="submit">
             Продолжить
           </button>
-          <p class="${this.classes.error} hidden">Нет связи с сервером</p>  
+          <p class="${this.classes.error} hidden">
+            Нет связи с сервером
+          </p>
         </form>
       </div>
     `;
