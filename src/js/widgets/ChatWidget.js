@@ -88,6 +88,7 @@ export default class ChatWidget {
     this.ws.addEventListener('message', (evt) => {
       const data = JSON.parse(evt.data);
       this.timeout = this.requestCycle;
+      clearTimeout(this.watchdog);
 
       switch (data.event) {
         case 'connect':
@@ -126,6 +127,10 @@ export default class ChatWidget {
       }
     });
 
+    this.ws.addEventListener('error', () => {
+      this.ws.close();
+    });
+
     this.ws.addEventListener('close', () => {
       this.registrationForm.showError('Нет связи с сервером');
       this.showError();
@@ -138,6 +143,8 @@ export default class ChatWidget {
       return;
     }
     this.ws.send(JSON.stringify(req));
+
+    this.watchdog = setTimeout(() => this.ws.close(), 10000);
   }
 
   registration(name) {
