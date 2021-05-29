@@ -8,7 +8,7 @@ export default class ChatWidget {
     this.classes = this.constructor.classes;
     this.name = null;
     this.lastMessageTime = 0;
-    this.requestCycle = 60;
+    this.timeout = 20;
   }
 
   static get classes() {
@@ -83,12 +83,14 @@ export default class ChatWidget {
       if (this.name) {
         this.registration(this.name);
       }
+
+      this.timeCount = this.timeout;
+      this.timer = setInterval(() => this.pingTimer(), 1000);
     });
 
     this.ws.addEventListener('message', (evt) => {
       const data = JSON.parse(evt.data);
-      this.timeout = this.requestCycle;
-      clearTimeout(this.watchdog);
+      this.timeCount = this.timeout;
 
       switch (data.event) {
         case 'connect':
@@ -101,8 +103,8 @@ export default class ChatWidget {
           break;
 
         case 'noconnect':
-          if (!this.widget.classList.contains('hidden')) {
-            window.location.reload();
+          if (this.name) {
+            this.hideChat();
           }
           this.registrationForm.showError(`Пользователь ${data.name} уже есть в чате`);
           this.name = null;
@@ -134,6 +136,7 @@ export default class ChatWidget {
     this.ws.addEventListener('close', () => {
       this.registrationForm.showError('Нет связи с сервером');
       this.showError();
+      clearInterval(this.timer);
       setTimeout(() => this.connect(), 3000);
     });
   }
@@ -143,12 +146,9 @@ export default class ChatWidget {
       return;
     }
     this.ws.send(JSON.stringify(req));
-
-    this.watchdog = setTimeout(() => this.ws.close(), 10000);
   }
 
   registration(name) {
-    this.name = name;
     this.send({
       event: 'connect',
       name,
@@ -158,8 +158,11 @@ export default class ChatWidget {
   showChat() {
     this.registrationForm.hide();
     this.widget.classList.remove('hidden');
-    this.timeout = this.requestCycle;
-    setInterval(() => this.requestTimer(), 1000);
+  }
+
+  hideChat() {
+    this.registrationForm.show();
+    this.widget.classList.add('hidden');
   }
 
   showError() {
@@ -223,17 +226,17 @@ export default class ChatWidget {
     });
   }
 
-  requestTimer() {
-    this.timeout--;
-    if (this.timeout) {
+  pingTimer() {
+    this.timeCount--;
+    if (!this.timeCount) {
+      this.ws.close();
       return;
     }
 
-    this.send({
-      event: 'request-messages',
-      time: this.lastMessageTime,
-    });
-
-    this.timeout = this.requestCycle;
+    if (this.timeCount === Math.trunc(this.timeout / 2)) {
+      this.send({
+        event: 'ping',
+      });
+    }
   }
 }
